@@ -28,3 +28,57 @@
 .belowZero {
   color: red;
 }
+article {
+  margin-top: 10px;
+  border: 3px solid black; 
+ 
+}
+
+#tweet-container:hover {
+  box-shadow: 10px 10px grey;
+  animation: normal;
+}
+
+#tweet-container .body {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.tweet-header  {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 5px;
+}
+
+img {
+  height: 70px;
+  padding-top: 20px;
+}
+
+.left-header {
+  display: flex;
+  flex-wrap: wrap;
+  opacity: .6;
+}
+
+.right-header {
+  opacity: .4;
+}
+
+.footer-btm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 3px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 5px;
+  font-size: small;
+}
+
+p {
+  margin-left: 20px;
+}

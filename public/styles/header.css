@@ -1,4 +1,4 @@
-header {
+.header {
   background-color: #58f000;
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */;
@@ -9,5 +9,6 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 120px;
 
 }
