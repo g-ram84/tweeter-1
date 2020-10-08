@@ -1,0 +1,19 @@
+.c-no-text {
+  background: #c51244;
+  padding: 10px;
+  border-radius: 0;
+  position: relative;
+  display: none;
+  box-shadow: 1px 1px 1px #aaaaaa;
+  margin-top: 10px;
+}
+
+.c-error {
+  background: #c51244;
+  padding: 10px;
+  border-radius: 0;
+  position: relative;
+  display: none;
+  box-shadow: 1px 1px 1px #aaaaaa;
+  margin-top: 10px;
+}
