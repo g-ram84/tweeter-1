@@ -6,12 +6,12 @@ $(document).ready(function() {
     let counter = form.find(".counter");
     let newChars = input.val().length;
     let charRemaining = 140 - newChars;
-    counter.html(charRemaining)
+    counter.html(charRemaining);
     if (charRemaining < 0) {
       counter.addClass("belowZero");
-    } 
+    }
     if (charRemaining >= 0) {
       counter.removeClass("belowZero");
     }
-  })
+  });
 });

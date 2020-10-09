@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/errors.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/breakpoints.css" type="text/css" />
     <link rel="stylesheet/less" type="text/css" href="styles.less" />
 
     <!-- External JS -->
@@ -23,9 +25,12 @@
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"
+    integrity="sha512-Izh34nqeeR7/nwthfeE0SI3c8uhFSnqxV0sI9TvTcXiFJkMd6fB644O64BRq2P/LA/+7eRvCw4GmLsXksyTHBg=="
+    crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body id="whole-page">
     <!-- Top nav bar (fixed) -->
     <nav>
       <span class="tweeter">tweeter</span>
@@ -45,6 +50,8 @@
     <main class="container"> 
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
+        <div class="c-error">Tweet too long!</div>
+        <div class="c-no-text">No text!</div>
         <form id="new-tweet" method="POST" action="/tweets/">
           <label class="placeholder" for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text"></textarea>

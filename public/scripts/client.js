@@ -5,47 +5,53 @@
  */
 $(document).ready(function() {
   const createTweetElement = function(tweetData) {
+    const escape =  function(str) {
+      let div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    };
     const $tweet = `<article>
     <header class="tweet-header">
       <div class="left-header">
-      <img src='${tweetData.user.avatars}'>
-      <h4 class="username">${tweetData.user.name}</h4>
+      <img src='${escape(tweetData.user.avatars)}'>
+      <h4 class="username">${escape(tweetData.user.name)}</h4>
       </div>
-      <h4 class="right-header">${tweetData.user.handle}</h4>
+      <h4 class="right-header">${escape(tweetData.user.handle)}</h4>
     </header>
-      <p>${tweetData.content.text}</p>
+      <p>${escape(tweetData.content.text)}</p>
     <footer class="footer-btm">
-     <output name="date" class="date" for="tweet-container">${tweetData.created_at}</output>
+     <output name="date" class="date" for="tweet-container">${escape(tweetData.created_at)}</output>
       <output  class="icons">🏴🔁🖤</output>
     </footer>
   </article>`;
-    $('#tweet-container').append($tweet);
-  }
+    $('#tweet-container').prepend($tweet);
+  };
 
   const renderTweets = function(tweets) {
-      tweets.forEach(tweet => {
-        createTweetElement(tweet)
-      }) 
-  }
+    tweets.forEach(tweet => {
+      createTweetElement(tweet);
+    });
+  };
 
   const $newTweet = $('#new-tweet');
   $newTweet.submit('click', function(event) {
-      event.preventDefault();
-      let tweetText = $('#tweet-text').serialize();
-      if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
-        $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
+     event.preventDefault();
+    let tweetText = $('#tweet-text').serialize();
+    if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
+      $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
+        .then()
         .then(()=> {
           $.ajax({ method: 'GET', url: '/tweets'}).then((res) => {
-            $('#tweet-container').empty()
+            $('#tweet-container').empty();
             renderTweets(res);
-          }) 
-        })
-      } else if ($('textarea').val().length === 0) {
-           alert('Nothing to Tweet!')
-      } else {
-           alert('Tweet too big!');
-      }
-  })
+          });
+        });
+    } else if ($('textarea').val().length === 0) {
+      $('.c-no-text').slideDown("slow").delay(1500).slideUp("slow");
+    } else {
+      $('.c-error').slideDown("slow").delay(1500).slideUp("slow");
+    }
+  });
 });
 
 
