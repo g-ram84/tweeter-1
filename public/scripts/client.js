@@ -39,8 +39,7 @@ $(document).ready(function() {
     let tweetText = $('#tweet-text').serialize();
     if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
       $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
-        .then()
-        .then(()=> {
+        .then(() => {
           $.ajax({ method: 'GET', url: '/tweets'}).then((res) => {
             $('#tweet-container').empty();
             renderTweets(res);
