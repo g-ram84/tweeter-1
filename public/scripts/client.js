@@ -1,3 +1,4 @@
+
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
@@ -29,7 +30,7 @@ $(document).ready(function() {
 
   const renderTweets = function(tweets) {
     tweets.forEach(tweet => {
-      createTweetElement(tweet);
+      createTweetElement(tweet); 
     });
   };
 
@@ -39,12 +40,14 @@ $(document).ready(function() {
     let tweetText = $('#tweet-text').serialize();
     if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
       $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
-        .then(() => {
-          $.ajax({ method: 'GET', url: '/tweets'}).then((res) => {
-            $('#tweet-container').empty();
-            renderTweets(res);
-          });
-        });
+      .then((res) => {
+        $.ajax({ method: 'GET', url: '/tweets'})
+          .then((res) => {
+            $('#tweet-text').val('')
+            $('.counter').val('140')
+            renderTweets(res)
+      }) 
+    })
     } else if ($('textarea').val().length === 0) {
       $('.c-no-text').slideDown("slow").delay(1500).slideUp("slow");
     } else {
