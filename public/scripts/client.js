@@ -4,13 +4,8 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-$(document).ready(function() {
-  const createTweetElement = function(tweetData) {
-    const escape =  function(str) {
-      let div = document.createElement('div');
-      div.appendChild(document.createTextNode(str));
-      return div.innerHTML;
-    };
+$(document).ready(function () {
+  const createTweetElement = function (tweetData) {
     const $tweet = `<article>
     <header class="tweet-header">
       <div class="left-header">
@@ -28,32 +23,43 @@ $(document).ready(function() {
     $('#tweet-container').prepend($tweet);
   };
 
-  const renderTweets = function(tweets) {
+  const renderTweets = function (tweets) {
+    $('#tweet-container').empty();
     tweets.forEach(tweet => {
-      createTweetElement(tweet); 
+      createTweetElement(tweet);
     });
   };
 
   const $newTweet = $('#new-tweet');
-  $newTweet.submit('click', function(event) {
-     event.preventDefault();
-    let tweetText = $('#tweet-text').serialize();
+  $newTweet.submit('click', function (event) {
+    event.preventDefault();
+    const tweetText = $('#tweet-text').serialize();
     if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
       $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
-      .then((res) => {
-        $.ajax({ method: 'GET', url: '/tweets'})
-          .then((res) => {
-            $('#tweet-text').val('')
-            $('.counter').val('140')
-            renderTweets(res)
-      }) 
-    })
+        .then((res) => {
+          $.ajax({ method: 'GET', url: '/tweets' })
+            .then((res) => {
+              $('#tweet-text').val('')
+              $('.counter').val('140')
+              renderTweets(res)
+            })
+        })
     } else if ($('textarea').val().length === 0) {
       $('.c-no-text').slideDown("slow").delay(1500).slideUp("slow");
     } else {
       $('.c-error').slideDown("slow").delay(1500).slideUp("slow");
     }
   });
+  $.ajax({ method: 'GET', url: '/tweets' })
+  .then((res) => {
+    $('#tweet-text').val('')
+    $('.counter').val('140')
+    renderTweets(res)
+  })
 });
-
+const escape = function (str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
 
