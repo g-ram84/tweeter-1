@@ -4,6 +4,11 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+const escape = function (str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
 $(document).ready(function () {
   const createTweetElement = function (tweetData) {
     const $tweet = `<article>
@@ -59,9 +64,5 @@ $(document).ready(function () {
     renderTweets(res)
   })
 });
-const escape = function (str) {
-  const div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
+
 
