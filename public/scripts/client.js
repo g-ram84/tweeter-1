@@ -32,19 +32,21 @@ $(document).ready(function () {
 
   const $newTweet = $('#new-tweet');
   $newTweet.submit('click', function (event) {
+    const tweetData = $('#tweet-text')
+    const textArea = $('textarea')
     event.preventDefault();
-    const tweetText = $('#tweet-text').serialize();
-    if (($('textarea').val().length > 0) && ($('textarea').val().length <= 140)) {
+    const tweetText = tweetData.serialize();
+    if ((textArea.val().length > 0) && (textArea.val().length <= 140)) {
       $.ajax({ method: 'POST', url: '/tweets', data: tweetText })
         .then((res) => {
           $.ajax({ method: 'GET', url: '/tweets' })
             .then((res) => {
-              $('#tweet-text').val('')
+              tweetData.val('')
               $('.counter').val('140')
               renderTweets(res)
             })
         })
-    } else if ($('textarea').val().length === 0) {
+    } else if (textArea.val().length === 0) {
       $('.c-no-text').slideDown("slow").delay(1500).slideUp("slow");
     } else {
       $('.c-error').slideDown("slow").delay(1500).slideUp("slow");
